@@ -39,5 +39,4 @@ public class CVista extends JFrame{
         setVisible(true);
         
     }
-
 }
