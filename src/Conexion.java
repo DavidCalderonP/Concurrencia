@@ -1,44 +1,42 @@
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Conexion {
-    String url = "jdbc:sqlserver://25.3.226.97:1433;database=Cuentas",
-           user = "sa",
-           password =  "1234";
+    String url = "jdbc:sqlserver://25.96.69.6:1433;database=Cuentas",
+           user = "TEC",
+           password =  "123";
 
     public Connection connect(){
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
-            System.out.println("La conexión falló");
+            //System.out.println("La conexión falló");
             return null;
         }
-        System.out.println("La conexión tuvo exito");
+        //System.out.println("La conexión tuvo exito");
         return connection; 
     }
 
-    public ResultSet query(String query){
-        ResultSet res = null;
-        try {
-            Statement statement = connect().createStatement();
-            res = statement.executeQuery(query);
+    // public ResultSet query(String query){
+    //     ResultSet res = null;
+    //     try {
+    //         Statement statement = connect().createStatement();
+    //         res = statement.executeQuery(query);
             
-            // System.out.println("NoCuenta\tImporte\t\tEstatus");
-            // while(res.next()){
-            //     System.out.println(res.getString(1) +"\t\t"+ res.getString(2) +"\t"+ res.getString(3));
-            // }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        return res;
-    }
+    //         // System.out.println("NoCuenta\tImporte\t\tEstatus");
+    //         // while(res.next()){
+    //         //     System.out.println(res.getString(1) +"\t\t"+ res.getString(2) +"\t"+ res.getString(3));
+    //         // }
+    //     } catch (SQLException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //         return null;
+    //     }
+    //     return res;
+    // }
 
     public void storeProcedure(String chequera, int retiro){
         try {
@@ -46,7 +44,7 @@ public class Conexion {
             clbleStmt.setString(1, chequera);
             clbleStmt.setInt(2, retiro);
             clbleStmt.execute();
-            System.out.println("Todo bien");
+            System.out.println("Transación realizada exitosamente!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -54,6 +52,15 @@ public class Conexion {
 
     /*
     --------------------------------------------------------------------------------------
+      PRIMARY KEY
+    --------------------------------------------------------------------------------------
+         1
+    --------------------------------------------------------------------------------------
+         2
+    --------------------------------------------------------------------------------------
+         3
+    --------------------------------------------------------------------------------------
+
 create   procedure sp_RetirarDinero @Chequera varchar(50), @Cantidad money as 
         
 begin	
